@@ -27,7 +27,7 @@ In React, side effects usually belong inside event handlers. For example, when t
 
 Take a look at `useSpeech.tsx` to see the example and more documentation.
 
-## You might not an useMemo :D
+## You might not need a useMemo :D
 Let's pretend `createEngine` is an expensive calc so recreating the engine on each re-render could cause a delay when painting the UI. We could be tempted to use `useMemo` because we have been told we can memoize an expensive calc, but that can be tricky. Why? because in this case, the dependencies array will be an empty array `[]`. So, it would look like this `const engine = useMemo(() => createEngine(), [])` and that is the tricky part. It's an expensive calc but it's not going to be recalculated in the time the component is mounted. Basically, your use case is retaining a value and you shouldn't rely on useMemo to retain a value. Why? React may add more features that take advantage of throwing away the cache to free memory or to reduce how much they retain. For this case, we can take advantage of react useRef and a single-like pattern.
 
 Take a look at `useSpeech.tsx` to see the example and more documentation.
